@@ -1,0 +1,61 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/B0ss-M/Live2MPC/blob/main/backend/main.py%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from fastapi import FastAPI\n",
+        "from backend.routes import (\n",
+        "    drumkit_routes,\n",
+        "    instrument_routes,\n",
+        "    sample_routes,\n",
+        "    analysis_routes, # Assuming you created this from previous steps\n",
+        "    xpm_fixer_routes # <-- ADD THIS IMPORT\n",
+        ")\n",
+        "\n",
+        "app = FastAPI(\n",
+        "    title=\"Live2MPC App\",\n",
+        "    description=\"API for creating and managing MPC instruments and drum kits.\",\n",
+        "    version=\"0.2.0\"\n",
+        ")\n",
+        "\n",
+        "# Include the routers\n",
+        "app.include_router(drumkit_routes.router, prefix=\"/api\", tags=[\"Drum Kits\"])\n",
+        "app.include_router(instrument_routes.router, prefix=\"/api\", tags=[\"Instruments\"])\n",
+        "app.include_router(sample_routes.router, prefix=\"/api\", tags=[\"Samples\"])\n",
+        "app.include_router(analysis_routes.router, prefix=\"/api\", tags=[\"Analysis\"])\n",
+        "app.include_router(xpm_fixer_routes.router, prefix=\"/api\", tags=[\"XPM Fixer\"]) # <-- ADD THIS LINE\n",
+        "\n",
+        "@app.get(\"/\", tags=[\"Root\"])\n",
+        "def read_root():\n",
+        "    return {\"message\": \"Welcome to the Live2MPC API\"}"
+      ],
+      "outputs": [],
+      "execution_count": null,
+      "metadata": {
+        "id": "8SvspV-vDDFa"
+      }
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
