@@ -20,7 +20,7 @@ This document outlines the tasks for the A.I. developer agents building the Live
 
 ## **Phase 3 – Export and Automation**
 
-* \[ \] Expansion Builder producing expansion.xml  
+* \[x\] Expansion Builder producing expansion.xml \- @Live2MPC  
 * \[ \] Advanced fixer logic and preview rendering  
 * \[ \] Batch automation tools and CLI support  
 * \[ \] UI polish and full MPC-style interaction
