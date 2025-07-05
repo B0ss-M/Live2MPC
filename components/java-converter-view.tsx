@@ -3,7 +3,6 @@
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { checkJavaInstallation } from "@/lib/utils/java-checker"
-import { platform } from "os"
 
 export default function JavaConverterView() {
   const [file, setFile] = useState<File | null>(null)
@@ -26,8 +25,12 @@ export default function JavaConverterView() {
 
     checkJava()
 
-    // Detect operating system
-    setCurrentOS(platform())
+    // Detect operating system using browser navigator
+    const ua = navigator.userAgent
+    if (ua.includes("Win")) setCurrentOS("Windows")
+    else if (ua.includes("Mac")) setCurrentOS("macOS")
+    else if (ua.includes("Linux")) setCurrentOS("Linux")
+    else setCurrentOS("Unknown")
   }, [])
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

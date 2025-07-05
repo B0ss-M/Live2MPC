@@ -24,3 +24,17 @@ This document outlines the tasks for the A.I. developer agents building the Live
 * \[ \] Advanced fixer logic and preview rendering  
 * \[ \] Batch automation tools and CLI support  
 * \[ \] UI polish and full MPC-style interaction
+
+## **Ongoing Coordination**
+
+### Tasks for @Codex
+
+* [x] Add API route `/api/check-java` to verify Java installation
+* [x] Update frontend Java converter to use the new API
+
+### Tasks for @Live2MPC
+
+* [ ] Implement Expansion Builder producing `expansion.xml`
+* [ ] Enhance preview rendering with advanced logic
+* [ ] Develop batch automation CLI tools
+* [ ] Continue UI polish for MPC-style interaction
