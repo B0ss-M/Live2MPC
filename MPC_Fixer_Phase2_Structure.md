@@ -1,0 +1,38 @@
+```
+frontend/
+    src/
+        components/
+            ChordProgressionBuilder.jsx/
+            MidiToProgressionConverter.jsx/
+            InstrumentManager.jsx/
+            PreviewRenderer.jsx/
+            VelocityLayerEditor.jsx/
+            ProgressionExporter.jsx/
+        utils/
+            progressionUtils.js/
+            midiUtils.js/
+        App.jsx/
+        main.jsx/
+        index.css/
+    public/
+        index.html/
+    tailwind.config.js/
+    postcss.config.js/
+    package.json/
+backend/
+    api/
+        progression_api.py/
+        preview_api.py/
+        instrument_api.py/
+    utils/
+        progression_utils.py/
+        midi_converter.py/
+        sample_mapper.py/
+        velocity_layer_manager.py/
+        sample_utils.py/
+    main.py/
+    requirements.txt/
+shared/
+    config.py/
+    constants.py/
+```
