@@ -3,11 +3,11 @@
 This file tracks progress on the MPC Fixer project. Agents should mark tasks as they complete them and sign their work.
 
 ## Phase 1 – Backend Foundation
-- [ ] Setup FastAPI backend structure
-- [ ] Implement `/upload-samples` route
-- [ ] Implement `/create-drumkit` route
-- [ ] Implement `/create-instrument` route
-- [ ] Provide sample analysis utilities
+- [x] Setup FastAPI backend structure @codex
+- [x] Implement `/upload-samples` route @codex
+- [x] Implement `/create-drumkit` route @codex
+- [x] Implement `/create-instrument` route @codex
+- [x] Provide sample analysis utilities @codex
 
 ## Phase 2 – Management Features
 - [ ] XPM Fixer module for repairing mappings
