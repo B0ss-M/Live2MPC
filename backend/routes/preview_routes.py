@@ -1,4 +1,4 @@
-from fastapi import APIRouter, File, UploadFile, HTTPException
+from fastapi import APIRouter, File, UploadFile, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse
 from typing import List
 import os
@@ -13,6 +13,7 @@ preview_service = PreviewGeneratorService()
 
 @router.post("/generate-preview/")
 async def generate_preview_route(
+    background_tasks: BackgroundTasks,
     xpm_file: UploadFile = File(...),
     sample_files: List[UploadFile] = File(...),
 ):
@@ -40,11 +41,12 @@ async def generate_preview_route(
         if not success or not os.path.exists(preview_output):
             raise HTTPException(status_code=400, detail="Failed to generate preview")
 
+        background_tasks.add_task(shutil.rmtree, temp_dir)
         return FileResponse(
             path=preview_output,
             media_type="audio/wav",
             filename="preview.wav",
-            background=lambda: shutil.rmtree(temp_dir),
+            background=background_tasks,
         )
     except Exception as e:
         shutil.rmtree(temp_dir)

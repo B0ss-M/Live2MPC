@@ -1,4 +1,4 @@
-from fastapi import APIRouter, File, UploadFile, Form, HTTPException
+from fastapi import APIRouter, File, UploadFile, Form, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse
 from typing import List
 import os
@@ -13,6 +13,7 @@ export_service = ExportService()
 
 @router.post("/export-kit/")
 async def export_kit_route(
+    background_tasks: BackgroundTasks,
     xpm_file: UploadFile = File(...),
     sample_files: List[UploadFile] = File(...),
     program_type: str = Form(...),
@@ -42,11 +43,12 @@ async def export_kit_route(
             program_name=program_name,
         )
 
+        background_tasks.add_task(shutil.rmtree, os.path.dirname(archive_path))
         return FileResponse(
             path=archive_path,
             media_type="application/zip",
             filename=f"{program_name}.zip",
-            background=lambda: os.remove(archive_path),
+            background=background_tasks,
         )
     finally:
         shutil.rmtree(temp_dir)

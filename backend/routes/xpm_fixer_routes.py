@@ -1,4 +1,4 @@
-from fastapi import APIRouter, File, UploadFile, HTTPException
+from fastapi import APIRouter, File, UploadFile, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse
 from typing import List
 import os
@@ -13,6 +13,7 @@ fixer_service = XpmFixerService()
 
 @router.post("/fix-xpm/")
 async def fix_xpm_route(
+    background_tasks: BackgroundTasks,
     xpm_file: UploadFile = File(...),
     sample_files: List[UploadFile] = File(...),
 ):
@@ -31,11 +32,12 @@ async def fix_xpm_route(
                 shutil.copyfileobj(sample.file, buffer)
 
         fixed_path = fixer_service.fix_xpm(xpm_path=xpm_path, samples_directory=samples_dir)
+        background_tasks.add_task(shutil.rmtree, temp_dir)
         return FileResponse(
             path=fixed_path,
             media_type="application/xml",
             filename=os.path.basename(fixed_path),
-            background=lambda: shutil.rmtree(temp_dir),
+            background=background_tasks,
         )
     except ValueError as e:
         shutil.rmtree(temp_dir)
