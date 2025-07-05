@@ -20,7 +20,8 @@
         "    sample_routes,\n",
         "    analysis_routes,\n",
         "    xpm_fixer_routes,\n",
-        "    preview_routes # <-- ADD THIS IMPORT\n",
+        "    preview_routes,\n",
+        "    sample_management_routes # <-- ADD THIS IMPORT\n",
         ")\n",
         "\n",
         "app = FastAPI(\n",
@@ -35,7 +36,8 @@
         "app.include_router(sample_routes.router, prefix=\"/api\", tags=[\"Samples\"])\n",
         "app.include_router(analysis_routes.router, prefix=\"/api\", tags=[\"Analysis\"])\n",
         "app.include_router(xpm_fixer_routes.router, prefix=\"/api\", tags=[\"XPM Fixer\"])\n",
-        "app.include_router(preview_routes.router, prefix=\"/api\", tags=[\"Preview\"]) # <-- ADD THIS LINE\n",
+        "app.include_router(preview_routes.router, prefix=\"/api\", tags=[\"Preview\"])\n",
+        "app.include_router(sample_management_routes.router, prefix=\"/api\", tags=[\"Sample Management\"]) # <-- ADD THIS LINE\n",
         "\n",
         "@app.get(\"/\", tags=[\"Root\"])\n",
         "def read_root():\n",
@@ -44,7 +46,7 @@
       "outputs": [],
       "execution_count": null,
       "metadata": {
-        "id": "buuSco4mDu7p"
+        "id": "jd-2cBqkEgkQ"
       }
     }
   ],
